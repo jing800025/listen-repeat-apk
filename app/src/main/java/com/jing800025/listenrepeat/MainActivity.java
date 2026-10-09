@@ -19,6 +19,18 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         webView = new WebView(this);
+
+        // 版本更新时清一次 WebView 缓存，避免覆盖安装后仍显示旧界面/旧配色
+        long verCode = 0;
+        try {
+            verCode = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+        } catch (Exception ignored) {}
+        android.content.SharedPreferences pf = getPreferences(MODE_PRIVATE);
+        if (pf.getLong("savedVer", -1) != verCode) {
+            webView.clearCache(true);
+            pf.edit().putLong("savedVer", verCode).apply();
+        }
+
         WebSettings s = webView.getSettings();
         s.setJavaScriptEnabled(true);
         s.setDomStorageEnabled(true);
@@ -55,7 +67,7 @@ public class MainActivity extends Activity {
                 return true;
             }
         });
-        webView.loadUrl("https://listen-repeat.pages.dev/");
+        webView.loadUrl("https://listen-repeat.pages.dev/_APKV");
         setContentView(webView);
     }
 
