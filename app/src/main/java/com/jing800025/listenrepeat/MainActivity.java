@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
                 return true;
             }
         });
-        webView.loadUrl("https://listen-repeat.pages.dev/_APKV");
+        webView.loadUrl("https://listen-repeat.pages.dev/kick.html_APKV");
         setContentView(webView);
     }
 
