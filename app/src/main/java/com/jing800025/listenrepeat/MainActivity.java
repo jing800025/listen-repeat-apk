@@ -32,6 +32,11 @@ public class MainActivity extends Activity {
         }
 
         WebSettings s = webView.getSettings();
+        // 关闭 WebView 强制深色（MIUI/安卓深色会把莫兰迪蓝反成橘橙），0=FORCE_DARK_OFF
+        try {
+            java.lang.reflect.Method mfd = WebSettings.class.getMethod("setForceDark", int.class);
+            mfd.invoke(s, 0);
+        } catch (Exception ignored) {}
         s.setJavaScriptEnabled(true);
         s.setDomStorageEnabled(true);
         s.setDatabaseEnabled(true);
@@ -67,7 +72,7 @@ public class MainActivity extends Activity {
                 return true;
             }
         });
-        webView.loadUrl("https://listen-repeat.pages.dev/kick.html?apkver=4");
+        webView.loadUrl("https://listen-repeat.pages.dev/kick.html?apkver=5");
         setContentView(webView);
     }
 
