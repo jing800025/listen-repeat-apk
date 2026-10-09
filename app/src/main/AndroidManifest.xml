@@ -6,6 +6,7 @@
         android:icon="@mipmap/ic_launcher"
         android:theme="@android:style/Theme.Material.Light.NoActionBar"
         android:allowBackup="true"
+        android:forceDarkAllowed="false"
         android:supportsRtl="true">
         <activity
             android:name=".MainActivity"
